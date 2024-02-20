@@ -1,0 +1,6 @@
+random_cat_widget:
+  version: 1.x
+  js:
+    js/random_cat_widget.js: {}
+  dependencies:
+    - core/jquery

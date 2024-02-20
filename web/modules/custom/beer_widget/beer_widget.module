@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * Allows getting and posting data to and from the punk API.
+ */
+
+
+/**
+ * Implements hook_theme()
+ */
+function beer_widget_theme() {
+  return [
+    'beer_widget_random_beer_block' => [
+      'variables' => [
+        'beer' => NULL,
+      ],
+    ],
+    'beer_widget_finder_results' => [
+      'variables' => [
+        'form' => [],
+        'beers' => NULL,
+      ],
+    ],
+  ];
+}

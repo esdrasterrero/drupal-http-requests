@@ -1,0 +1,14 @@
+{# modules/custom/cat_widgets/templates/cat-widgets-random-cats-block.html.twig #}
+<div id="random-cat-widget">
+  <h2>{{ 'Random Cat'|t }}</h2>
+  <div id="cat-api-message"></div>
+  {% if cat.url %}
+    <img src="{{ cat.url }}" alt="{{ cat.id }}" width="300">
+    <div class="vote-button-container">
+      {{ votes.up }}
+      {{ votes.down }}
+    </div>
+  {% else %}
+    <p>No cat image available.</p>
+  {% endif %}
+</div>

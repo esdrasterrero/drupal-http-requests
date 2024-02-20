@@ -1,0 +1,5 @@
+services:
+  cat_widgets.api:
+    class: Drupal\cat_widgets\CatWidgetsApiService
+    arguments:
+      [ '@api_connector' ]

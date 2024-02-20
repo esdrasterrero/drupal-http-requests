@@ -1,0 +1,8 @@
+cat_widgets.vote_callback:
+  path: '/cat_widgets/vote/{id}/{value}'
+  defaults:
+    _controller: 'cat_widgets.api:vote'
+    id: ''
+    value: 0
+  requirements:
+    _permission: 'access content'

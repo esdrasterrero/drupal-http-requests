@@ -1,0 +1,25 @@
+{# cat-widgets-finder-results.html.twig #}
+<h2>Cats by breed</h2>
+<div class="search-form">
+  {{ form }}
+</div>
+{% if cats is not null %}
+  <div style="display: grid">
+      <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); transition: 0.3s; width: 100%; margin: 25px;">
+        <div class="center-image" style="display: flex; justify-content: center; align-items: center;">
+          {% for cat in cats %}
+            <img src="{{ cat.url }}" alt="{{ cat.id }}" style="max-width: 300px; padding: 30px">
+          {% endfor %}
+        </div>
+        <div class="container" style="padding: 2px 16px; background: #f5f8f8">
+          <h3>{{ breed_info.name }}</h3>
+          <h4>Temperament</h4>
+          <p>{{ breed_info.temperament }}</p>
+          <h4>Description</h4>
+          <p>{{ breed_info.description }}</p>
+          <p><a href="{{ breed_info.wikipedia_url }}" target="_blank">Wikipedia</a></p>
+        </div>
+      </div>
+  </div>
+{% endif %}
+

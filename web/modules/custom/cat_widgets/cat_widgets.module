@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * @file
+ * Allows getting and posting data to and from the punk API.
+ */
+
+
+/**
+ * Implements hook_theme()
+ */
+function cat_widgets_theme() {
+  return [
+    'cat_widgets_random_cats_block' => [
+      'variables' => [
+        'cat' => NULL,
+        'votes' => NULL,
+      ],
+    ],
+    'cat_widgets_finder_results' => [
+      'variables' => [
+        'form' => [],
+        'cats' => NULL,
+        'breed_info' => NULL,
+      ],
+    ],
+  ];
+}

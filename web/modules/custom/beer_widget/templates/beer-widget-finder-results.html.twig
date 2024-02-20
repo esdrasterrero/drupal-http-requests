@@ -1,0 +1,22 @@
+{# beer-widget-finder-results.html.twig #}
+<h2>Beer by dish</h2>
+<div class="search-form">
+  {{ form }}
+</div>
+{% if beers is not null %}
+  <div style="display: grid">
+  {% for beer in beers %}
+    <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); transition: 0.3s; width: 33%; margin: 25px;">
+      <div class="center-image" style="display: flex; justify-content: center; align-items: center; padding: 30px">
+        <img src="{{ beer.image_url }}" alt="{{ beer.name }}" style="max-width: 100px;">
+      </div>
+      <div class="container" style="padding: 2px 16px; background: #f5f8f8">
+        <h4>{{ beer.name }}</h4>
+        <p>{{ beer.tagline }}</p>
+        <p>ABV: {{ beer.abv }}%</p>
+      </div>
+    </div>
+  {% endfor %}
+  </div>
+{% endif %}
+

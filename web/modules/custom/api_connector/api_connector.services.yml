@@ -1,0 +1,5 @@
+services:
+  api_connector:
+    class: Drupal\api_connector\ApiConnectorService
+    arguments:
+      [ '@http_client']

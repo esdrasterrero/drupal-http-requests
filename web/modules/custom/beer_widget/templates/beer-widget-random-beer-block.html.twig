@@ -1,0 +1,11 @@
+{# modules/custom/punk_api_integration/templates/punk-api-random-beer-block.html.twig #}
+{#{{ dump(beer) }}#}
+<div>
+  <h2>{{ 'Beer of the day'|t }}</h2>
+  <h3>{{ beer.name }}</h3>
+  <img src="{{ beer.image_url }}" alt="{{ beer.name }}" width="100">
+  <p><strong>Tagline:</strong> {{ beer.tagline }}</p>
+  <p><strong>Description:</strong> {{ beer.description }}</p>
+  <p><strong>ABV:</strong> {{ beer.abv }}</p>
+  {# Add more fields as needed. #}
+</div>
