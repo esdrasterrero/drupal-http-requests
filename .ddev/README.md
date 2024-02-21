@@ -1,7 +1,7 @@
 # Setting up the project
 #### Table of contents
 
-- [Setup](README.md:15)
+- [Setup](./README.md:15)
   - [Requirements for running the project](README.md:16)
   - [Install DDEV](README.md:22)
 - [Starting the project](README.md:40)
