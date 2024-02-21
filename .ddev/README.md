@@ -1,8 +1,8 @@
 # Setting up the project
 #### Table of contents
 
-- [Setup](./README.md:15)
-  - [Requirements for running the project](README.md:16)
+- [Setup](#setup)
+  - [Requirements for running the project](#project-requirements)
   - [Install DDEV](README.md:22)
 - [Starting the project](README.md:40)
   - [Spin up the project](README.md:41)
@@ -12,7 +12,9 @@
   - [Launch the project using the `drush site:install` command](README.md:67)
 - [Using the available blocks](README.md:85)
 
+<a name="setup"></a>
 ## Setup
+<a name="project-requirements"></a>
 ### Requirements for running the project
 - A [Docker](https://ddev.readthedocs.io/en/stable/users/install/docker-installation/) provider
 - [DDEV installation](https://ddev.readthedocs.io/en/stable/users/install/ddev-installation/)
