@@ -2,4 +2,8 @@ services:
   api_connector:
     class: Drupal\api_connector\ApiConnectorService
     arguments:
-      [ '@http_client']
+      [ '@http_client', '@messenger', '@logger.channel.api_connector',]
+  logger.channel.api_connector:
+    parent: logger.channel_base
+    arguments: [ 'api_connector' ]
+

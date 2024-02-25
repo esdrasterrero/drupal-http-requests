@@ -4,7 +4,6 @@ namespace Drupal\cat_widgets\Form;
 
 use Drupal\api_connector\ApiConnectorService;
 use Drupal\cat_widgets\CatWidgetsApiService;
-use Drupal\cat_widgets\Constants\CatWidgetsConstants;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\TempStore\PrivateTempStoreFactory;
@@ -94,25 +93,13 @@ class CatFinderByBreedForm extends FormBase {
    * @throws \Drupal\Core\TempStore\TempStoreException
    */
   public function submitForm(array &$form, FormStateInterface $form_state): void {
-    $breed = $form_state->getValue('breed');
 
-    // Assemble the endpoint.
-    $getCatsByBreedEndpoint = CatWidgetsConstants::API_BASE_URL . CatWidgetsConstants::IMAGES_SEARCH_ENDPOINT;
-    // Cast the request options array to apply.
-    $requestOptions = [
-      'headers' => [
-        'x-api-key' => CatWidgetsConstants::CAT_API_KEY,
-      ],
-      'query' => [
-        'breed_ids' => $breed,
-        'limit' => CatWidgetsConstants::LIMIT,
-      ],
-    ];
-    // Make a HTTP request to the Cat API to retrieve cats matching the specified breed.
-    $response = $this->apiConnector->makeHttpRequest('GET', $getCatsByBreedEndpoint, $requestOptions);
-    if (!empty($response)) {
+    $catsByBreed = $this->catWidgetsApi->getCatsByBreed(
+      $form_state->getValue('breed')
+    );
+    if (!empty($catsByBreed)) {
       // Store the response using Drupal's temporary storage.
-      $this->privateTempStore->get('cat_widgets')->set('cats', $response);
+      $this->privateTempStore->get('cat_widgets')->set('cats', $catsByBreed);
     }
   }
 

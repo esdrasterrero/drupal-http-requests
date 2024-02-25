@@ -69,7 +69,7 @@ class RandomCatsBlock extends BlockBase implements ContainerFactoryPluginInterfa
     $endpoint = CatWidgetsConstants::API_BASE_URL . CatWidgetsConstants::IMAGES_SEARCH_ENDPOINT;
     // Make a HTTP request to the Cat API to retrieve a random cat.
     $response = $this->apiConnector->makeHttpRequest('GET', $endpoint);
-    if (is_array($response)) {
+    if (!empty($response)) {
       $cat = $response[0];
       // Assemble the voting links.
       $voteButtons = $this->catWidgetsApi->getVoteLinks($cat['id']);

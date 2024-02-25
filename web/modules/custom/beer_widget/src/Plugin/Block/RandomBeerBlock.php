@@ -58,7 +58,7 @@ class RandomBeerBlock extends BlockBase implements ContainerFactoryPluginInterfa
     $endpoint = BeerWidgetConstants::API_BASE_URL . BeerWidgetConstants::RANDOM_BEER_ENDPOINT;
     // Make an HTTP request to the PUNK API to retrieve a random beer.
     $response = $this->apiConnector->makeHttpRequest('GET', $endpoint );
-    if (is_array($response)) {
+    if (!empty($response)) {
       $beer = $response[0];
     }
 

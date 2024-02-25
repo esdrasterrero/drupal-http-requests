@@ -131,4 +131,31 @@ class CatWidgetsApiService {
     }
     return $breedsList;
   }
+
+  /**
+   * Get Cats filtered by the given breed from the Cat API.
+   *
+   * @param string $breed
+   *   The breed name.
+   *
+   * @return array
+   * @throws \GuzzleHttp\Exception\GuzzleException
+   */
+  public function getCatsByBreed(string $breed): array {
+    // Assemble the endpoint.
+    $getCatsByBreedEndpoint = CatWidgetsConstants::API_BASE_URL . CatWidgetsConstants::IMAGES_SEARCH_ENDPOINT;
+    // Cast the request options array to apply.
+    $requestOptions = [
+      'headers' => [
+        'x-api-key' => CatWidgetsConstants::CAT_API_KEY,
+      ],
+      'query' => [
+        'breed_ids' => $breed,
+        'limit' => CatWidgetsConstants::LIMIT,
+      ],
+    ];
+
+    // Make an HTTP request to the Cat API to retrieve cats matching the specified breed.
+    return $this->apiConnector->makeHttpRequest('GET', $getCatsByBreedEndpoint, $requestOptions);
+  }
 }

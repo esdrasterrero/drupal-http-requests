@@ -2,14 +2,16 @@
 
 namespace Drupal\api_connector;
 
+use Drupal\Core\Messenger\MessengerInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Response;
-use Psr\Http\Message\ResponseInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  * Handles API connector methods.
  */
 class ApiConnectorService {
+  use StringTranslationTrait;
   /**
    * The HTTP client.
    *
@@ -18,13 +20,32 @@ class ApiConnectorService {
   protected Client $httpClient;
 
   /**
+   * The messenger service.
+   *
+   * @var \Drupal\Core\Messenger\MessengerInterface
+   */
+  protected MessengerInterface $messenger;
+
+  /**
+   * The drupal logger.
+   *
+   * @var \Psr\Log\LoggerInterface
+   */
+  protected LoggerInterface $logger;
+
+  /**
    * Initializes a new instance of the ApiConnectorService class with the
    * provided params.
    *
    * @param \GuzzleHttp\Client $http_client
+   *   The http client.
+   * @param \Psr\Log\LoggerInterface $logger
+   *   A logger interface.
    */
-  public function __construct(Client $http_client) {
+  public function __construct(Client $http_client, MessengerInterface $messenger, LoggerInterface $logger) {
     $this->httpClient = $http_client;
+    $this->messenger = $messenger;
+    $this->logger = $logger;
   }
 
   /**
@@ -40,12 +61,19 @@ class ApiConnectorService {
    *  The option to convert the response into an associative array.
    *
    *
-   * @return mixed
+   * @return array
    * @throws \GuzzleHttp\Exception\GuzzleException
    */
-  public function makeHttpRequest(string $method, string $url, array $options = [], bool $convertToAssociativeArray = TRUE): mixed {
-    $response = $this->httpClient->request($method, $url, $options);
+  public function makeHttpRequest(string $method, string $url, array $options = [], bool $convertToAssociativeArray = TRUE): array {
+    try {
+      $response = $this->httpClient->request($method, $url, $options);
 
-    return json_decode($response->getBody()->getContents(), $convertToAssociativeArray);
+      return json_decode($response->getBody()->getContents(), $convertToAssociativeArray);
+    } catch (\Exception $exception) {
+      $this->logger->error($exception->getMessage());
+      $this->messenger->addMessage($this->t('Could not connect to the API.'));
+
+      return [];
+    }
   }
 }
